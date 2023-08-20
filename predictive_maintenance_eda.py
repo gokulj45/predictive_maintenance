@@ -12,7 +12,7 @@ spark = SparkSession \
     .getOrCreate()
 
 # Importing data from csv file
-df = spark.read.csv('gs://source_data_exp/data/exp1_14drivers_14cars_dailyRoutes.csv', header=True)
+df = spark.read.csv('gs://dataproc_predictive_maintenance/data/exp1_14drivers_14cars_dailyRoutes.csv', header=True)
 #df.show()
 # Displaying Number of Records
 print("Number of Records : ", df.count())
@@ -79,6 +79,6 @@ table_id = "exp1_14_drivers"
 # Create a BigQuery external table from the temporary view
 df.write \
   .format("bigquery") \
-  .option("temporaryGcsBucket", "source_data_exp") \
+  .option("temporaryGcsBucket", "dataproc_predictive_maintenance/tmp") \
   .mode("overwrite") \
   .save(f"{project_id}:{dataset_id}.{table_id}")
