@@ -17,7 +17,7 @@ spark = SparkSession \
     .appName("Predictive_maintenance_eda") \
     .getOrCreate()
 
-df = spark.read.csv('https://storage.cloud.google.com/source_data_exp/data/exp1_14drivers_14cars_dailyRoutes.csv?authuser=1', header=True)
+df = spark.read.csv('gs://source_data_exp/data/exp1_14drivers_14cars_dailyRoutes.csv', header=True)
 
 df.show()
 
