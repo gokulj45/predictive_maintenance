@@ -77,12 +77,10 @@ dataset_id = "predictive_maintenance_dataset"
 table_id = "exp1_14_drivers"
 
 # Create a BigQuery external table from the temporary view
-spark.sql(f"""
-    CREATE OR REPLACE EXTERNAL TABLE `{project_id}.{dataset_id}.{table_id}`
-    OPTIONS (
-        format = 'PARQUET',
-        parquet_compression = 'SNAPPY',
-        parquet_enable_dictionary_encoding = true
-    )
-    AS SELECT * FROM {temp_view_name}
-""")
+write_dataframe(
+    df=spark.table(temp_view_name),
+    project_id=project_id,
+    dataset_id=dataset_id,
+    table_id=table_id,
+    mode="overwrite"
+)
