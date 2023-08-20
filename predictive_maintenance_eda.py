@@ -32,7 +32,7 @@ df.select('TROUBLE_CODES').distinct().collect()
 
 df.describe().show()
 
-display(df.printSchema())
+df.printSchema()
 
 df.select([count(when(isnan(c), c)).alias(c) for c in df.columns]).show()
 
