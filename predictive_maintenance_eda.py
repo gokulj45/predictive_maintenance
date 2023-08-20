@@ -10,12 +10,12 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
 from pyspark.sql import SparkSession
-
-spark = SparkSession.builder\
-        .master("local")\
-        .appName("Predictive_maintenance_eda")\
-        .config('spark.ui.port', '4050')\
-        .getOrCreate()
+from pyspark import SparkContext
+sc = SparkContext('local', 'logistic')
+spark = SparkSession \
+    .builder \
+    .appName("Predictive_maintenance_eda") \
+    .getOrCreate()
 
 df = spark.read.csv('https://storage.cloud.google.com/source_data_exp/data/exp1_14drivers_14cars_dailyRoutes.csv?authuser=1', header=True)
 
