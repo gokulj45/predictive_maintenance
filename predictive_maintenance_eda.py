@@ -3,7 +3,7 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.sql import SparkSession
 from pyspark import SparkContext
-from pyspark_bigquery import write_dataframe
+
 # Building Spark session
 sc = SparkContext('local', 'logistic')
 spark = SparkSession \
@@ -77,10 +77,8 @@ dataset_id = "predictive_maintenance_dataset"
 table_id = "exp1_14_drivers"
 
 # Create a BigQuery external table from the temporary view
-write_dataframe(
-    df=spark.table(temp_view_name),
-    project_id=project_id,
-    dataset_id=dataset_id,
-    table_id=table_id,
-    mode="overwrite"
-)
+df.write \
+  .format("bigquery") \
+  .option("temporaryGcsBucket", "source_data_exp") \
+  .mode("overwrite") \
+  .save(f"{project_id}:{dataset_id}.{table_id}")
