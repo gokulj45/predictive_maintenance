@@ -3,7 +3,7 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.sql import SparkSession
 from pyspark import SparkContext
-
+from pyspark_bigquery import write_dataframe
 # Building Spark session
 sc = SparkContext('local', 'logistic')
 spark = SparkSession \
