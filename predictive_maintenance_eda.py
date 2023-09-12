@@ -1,8 +1,9 @@
 # Necessary Imports
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, types
 from pyspark import SparkContext
+from operator import attrgetter
 
 # Building Spark session
 sc = SparkContext('local', 'logistic')
@@ -68,6 +69,16 @@ df = df.withColumn("CAR_YEAR",df.CAR_YEAR.cast(IntegerType()))\
 .withColumn("TIMING_ADVANCE", df.TIMING_ADVANCE.cast(FloatType())/100)\
 .withColumn("ENGINE_LOAD", df.ENGINE_LOAD.cast(FloatType())/100)
 #df.show()
+
+# Performing interpolation to fill missing values
+pd_df = df.toPandas()
+pd_df = pd_df.interpolate()
+
+# Filling missing values with mean for SHORT TERM FUEL TRIM BANK 1
+mean_value = pd_df['SHORT TERM FUEL TRIM BANK 1'].mean()
+pd_df['SHORT TERM FUEL TRIM BANK 1'].fillna(mean_value, inplace=True)
+df = spark.createDataFrame(pd_df)
+
 # Creating spark temp view
 df.createOrReplaceTempView("CLEANED_VIEW")
 # Big query - Project and dataset details
