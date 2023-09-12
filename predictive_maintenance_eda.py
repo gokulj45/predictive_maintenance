@@ -51,7 +51,8 @@ print("---------------------------------------------------------------\n")
 # Datatype conversion
 df = df.withColumn("THROTTLE_POS", regexp_replace(col("THROTTLE_POS"), "%", ""))\
 .withColumn("TIMING_ADVANCE", regexp_replace(col("TIMING_ADVANCE"), "%", ""))\
-.withColumn("ENGINE_LOAD", regexp_replace(col("ENGINE_LOAD"), "%", ""))
+.withColumn("ENGINE_LOAD", regexp_replace(col("ENGINE_LOAD"), "%", ""))\
+.withColumn("SHORT TERM FUEL TRIM BANK 1",when(isnull(col("SHORT TERM FUEL TRIM BANK 1")),lit(0)).otherwise(col("SHORT TERM FUEL TRIM BANK 1")))
 #df.show()
 df = df.withColumn("CAR_YEAR",df.CAR_YEAR.cast(IntegerType()))\
 .withColumn("ENGINE_COOLANT_TEMP",df.ENGINE_COOLANT_TEMP.cast(IntegerType()))\
@@ -67,7 +68,8 @@ df = df.withColumn("CAR_YEAR",df.CAR_YEAR.cast(IntegerType()))\
 .withColumn("ENGINE_POWER",df.ENGINE_POWER.cast(FloatType()))\
 .withColumn("THROTTLE_POS", df.THROTTLE_POS.cast(FloatType())/100)\
 .withColumn("TIMING_ADVANCE", df.TIMING_ADVANCE.cast(FloatType())/100)\
-.withColumn("ENGINE_LOAD", df.ENGINE_LOAD.cast(FloatType())/100)
+.withColumn("ENGINE_LOAD", df.ENGINE_LOAD.cast(FloatType())/100)\
+.withColumn("SHORT TERM FUEL TRIM BANK 1", df["SHORT TERM FUEL TRIM BANK 1"].cast(IntegerType()))
 #df.show()
 
 # Performing interpolation to fill missing values
