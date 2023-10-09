@@ -260,58 +260,58 @@ client = storage.Client()
 
 # Define your GCS bucket and destination blob path
 bucket_name = 'dataproc_predictive_maintenance'
-dt_blob_name = 'models/decision_tree_model.sav'
-rf_blob_name = 'models/random_forest_model.sav'
-knn_blob_name = 'models/knn_classifier_model.sav'
-svm_blob_name = 'models/svm_classifier_model.sav'
-nb_blob_name = 'models/naive_bayes_model.sav'
+dt_blob_name = 'models/dt/decision_tree_model.sav'
+rf_blob_name = 'models/rf/random_forest_model.sav'
+knn_blob_name = 'models/knn/knn_classifier_model.sav'
+svm_blob_name = 'models/svm/svm_classifier_model.sav'
+nb_blob_name = 'models/nb/naive_bayes_model.sav'
 
 
 decision_tree = DecisionTreeClassifier()
 decision_tree.fit(X_train, y_train)
 y_pred_decision_tree = decision_tree.predict(X_val)
-pickle.dump(decision_tree, open("decision_tree_model.sav", 'wb'))
+pickle.dump(decision_tree, open("decision_tree_model", 'wb'))
 
 # Upload the model to GCS
 bucket = client.get_bucket(bucket_name)
 blob = bucket.blob(dt_blob_name)
-blob.upload_from_filename('decision_tree_model.sav')
+blob.upload_from_filename('decision_tree_model')
 
 random_forest = RandomForestClassifier()
 random_forest.fit(X_train, y_train)
 y_pred_random_forest = random_forest.predict(X_val)
-pickle.dump(random_forest, open("random_forest_model.sav", 'wb'))
+pickle.dump(random_forest, open("random_forest_model", 'wb'))
 
 bucket = client.get_bucket(bucket_name)
 blob = bucket.blob(rf_blob_name)
-blob.upload_from_filename('random_forest_model.sav')
+blob.upload_from_filename('random_forest_model')
 
 knn_classifier = KNeighborsClassifier()
 knn_classifier.fit(X_train, y_train)
 y_pred_knn = knn_classifier.predict(X_val)
-pickle.dump(knn_classifier, open("knn_classifier_model.sav", 'wb'))
+pickle.dump(knn_classifier, open("knn_classifier_model", 'wb'))
 
 bucket = client.get_bucket(bucket_name)
 blob = bucket.blob(knn_blob_name)
-blob.upload_from_filename('knn_classifier_model.sav')
+blob.upload_from_filename('knn_classifier_model')
 
 svm_classifier = SVC(kernel='linear', random_state=1)
 svm_classifier.fit(X_train, y_train)
 y_pred_svm = svm_classifier.predict(X_val)
-pickle.dump(svm_classifier, open("svm_classifier_model.sav", 'wb'))
+pickle.dump(svm_classifier, open("svm_classifier_model", 'wb'))
 
 bucket = client.get_bucket(bucket_name)
 blob = bucket.blob(svm_blob_name)
-blob.upload_from_filename('svm_classifier_model.sav')
+blob.upload_from_filename('svm_classifier_model')
 
 naive_bayes = GaussianNB()
 naive_bayes.fit(X_train, y_train)
 y_pred_naive_bayes = naive_bayes.predict(X_val)
-pickle.dump(naive_bayes, open("naive_bayes_model.sav", 'wb'))
+pickle.dump(naive_bayes, open("naive_bayes_model", 'wb'))
 
 bucket = client.get_bucket(bucket_name)
 blob = bucket.blob(nb_blob_name)
-blob.upload_from_filename('naive_bayes_model.sav')
+blob.upload_from_filename('naive_bayes_model')
 
 # Evaluate the models
 def evaluate_model(y_true, y_pred, model_name):
