@@ -329,14 +329,3 @@ evaluate_model(y_val, y_pred_random_forest, "Random Forest")
 evaluate_model(y_val, y_pred_svm, "Support Vector Machine (SVM)")
 evaluate_model(y_val, y_pred_knn, "K-Nearest Neighbors (KNN)")
 evaluate_model(y_val, y_pred_naive_bayes, "Naive Bayes")
-
-# Big query - Project and dataset details
-temp_view_name = "CLEANED_VIEW"
-project_id = "avid-airway-395106"
-dataset_id = "predictive_maintenance_dataset"
-table_id = "exp1_14_drivers"
-
-
-
-
-
