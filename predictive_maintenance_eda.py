@@ -260,7 +260,7 @@ client = storage.Client()
 
 # Define your GCS bucket and destination blob path
 bucket_name = 'dataproc_predictive_maintenance'
-dt_blob_name = 'models/dt/'
+dt_blob_name = 'models/dt/decision_tree_model.pkl'
 rf_blob_name = 'models/rf/random_forest_model.pkl'
 knn_blob_name = 'models/knn/knn_classifier_model.pkl'
 svm_blob_name = 'models/svm/svm_classifier_model.pkl'
