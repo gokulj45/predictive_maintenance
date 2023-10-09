@@ -3,7 +3,6 @@
 import warnings
 warnings.filterwarnings("ignore")
 import matplotlib.pyplot as plt
-%matplotlib inline
 import seaborn as sns
 import numpy as np
 import pandas as pd
