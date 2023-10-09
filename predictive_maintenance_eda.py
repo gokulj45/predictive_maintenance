@@ -262,7 +262,7 @@ client = storage.Client()
 bucket_name = 'dataproc_predictive_maintenance'
 dt_blob_name = 'models/decision_tree_model.sav'
 rf_blob_name = 'models/random_forest_model.sav'
-knn_blob_name = 'models/random_forest_model.sav'
+knn_blob_name = 'models/knn_classifier_model.sav'
 svm_blob_name = 'models/svm_classifier_model.sav'
 nb_blob_name = 'models/naive_bayes_model.sav'
 
