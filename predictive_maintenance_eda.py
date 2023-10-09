@@ -19,6 +19,8 @@ from sklearn.metrics import accuracy_score, classification_report
 
 import pickle
 
+from google.cloud import storage
+
 # Necessary Imports
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
@@ -253,10 +255,24 @@ def show_histogram(X_f,X_p,X_p_n):
 X_features = ['ENGINE_POWER', 'ENGINE_COOLANT_TEMP', 'ENGINE_LOAD', 'ENGINE_RPM', 'AIR_INTAKE_TEMP', 'SPEED', 'THROTTLE_POS','TIMING_ADVANCE', 'SHORT_TERM_FUEL_TRIM_BANK']
 show_histogram(X_features[:],X_plot[:,:],X_train[:,:])
 
+# Initialize a GCS client
+client = storage.Client()
+
+# Define your GCS bucket and destination blob path
+bucket_name = 'dataproc_predictive_maintenance'
+blob_name = 'models/decision_tree_model.sav'
+
+
+
 decision_tree = DecisionTreeClassifier()
 decision_tree.fit(X_train, y_train)
 y_pred_decision_tree = decision_tree.predict(X_val)
 pickle.dump(decision_tree, open("/home/g2021fc04388/predictive_maintenance/decision_tree_model.sav", 'wb'))
+
+# Upload the model to GCS
+bucket = client.get_bucket(bucket_name)
+blob = bucket.blob(blob_name)
+blob.upload_from_filename('decision_tree_model.sav')
 
 random_forest = RandomForestClassifier()
 random_forest.fit(X_train, y_train)
@@ -300,3 +316,8 @@ temp_view_name = "CLEANED_VIEW"
 project_id = "avid-airway-395106"
 dataset_id = "predictive_maintenance_dataset"
 table_id = "exp1_14_drivers"
+
+
+
+
+
