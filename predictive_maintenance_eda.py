@@ -267,7 +267,7 @@ blob_name = 'models/decision_tree_model.sav'
 decision_tree = DecisionTreeClassifier()
 decision_tree.fit(X_train, y_train)
 y_pred_decision_tree = decision_tree.predict(X_val)
-pickle.dump(decision_tree, open("/home/g2021fc04388/predictive_maintenance/decision_tree_model.sav", 'wb'))
+pickle.dump(decision_tree, open("decision_tree_model.sav", 'wb'))
 
 # Upload the model to GCS
 bucket = client.get_bucket(bucket_name)
