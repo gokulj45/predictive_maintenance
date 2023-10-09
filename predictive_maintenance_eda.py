@@ -256,27 +256,27 @@ show_histogram(X_features[:],X_plot[:,:],X_train[:,:])
 decision_tree = DecisionTreeClassifier()
 decision_tree.fit(X_train, y_train)
 y_pred_decision_tree = decision_tree.predict(X_val)
-pickle.dump(decision_tree, open("decision_tree_model.sav", 'wb'))
+pickle.dump(decision_tree, open("/home/g2021fc04388/predictive_maintenance/decision_tree_model.sav", 'wb'))
 
 random_forest = RandomForestClassifier()
 random_forest.fit(X_train, y_train)
 y_pred_random_forest = random_forest.predict(X_val)
-pickle.dump(random_forest, open("random_forest_model.sav", 'wb'))
+pickle.dump(random_forest, open("/home/g2021fc04388/predictive_maintenance/random_forest_model.sav", 'wb'))
 
 knn_classifier = KNeighborsClassifier()
 knn_classifier.fit(X_train, y_train)
 y_pred_knn = knn_classifier.predict(X_val)
-pickle.dump(knn_classifier, open("knn_classifier_model.sav", 'wb'))
+pickle.dump(knn_classifier, open("/home/g2021fc04388/predictive_maintenance/knn_classifier_model.sav", 'wb'))
 
 svm_classifier = SVC(kernel='linear', random_state=1)
 svm_classifier.fit(X_train, y_train)
 y_pred_svm = svm_classifier.predict(X_val)
-pickle.dump(svm_classifier, open("svm_classifier_model.sav", 'wb'))
+pickle.dump(svm_classifier, open("/home/g2021fc04388/predictive_maintenance/svm_classifier_model.sav", 'wb'))
 
 naive_bayes = GaussianNB()
 naive_bayes.fit(X_train, y_train)
 y_pred_naive_bayes = naive_bayes.predict(X_val)
-pickle.dump(naive_bayes, open("naive_bayes_model.sav", 'wb'))
+pickle.dump(naive_bayes, open("/home/g2021fc04388/predictive_maintenance/naive_bayes_model.sav", 'wb'))
 
 # Evaluate the models
 def evaluate_model(y_true, y_pred, model_name):
