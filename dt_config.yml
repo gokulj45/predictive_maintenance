@@ -1,0 +1,10 @@
+description: A free-form description of the version.
+deploymentUri: gs://path/to/source
+runtimeVersion: '2.1'
+#  Set only one of either manualScaling or autoScaling.
+manualScaling:
+  nodes: 10  # The number of nodes to allocate for this model.
+autoScaling:
+  minNodes: 0  # The minimum number of nodes to allocate for this model.
+labels:
+  user-defined-key: user-defined-value
