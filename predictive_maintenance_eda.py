@@ -36,7 +36,7 @@ spark = SparkSession \
     .getOrCreate()
 
 # Importing data from csv file
-df = spark.read.csv('gs://dataproc_predictive_maintenance/data/exp1_14drivers_14cars_dailyRoutes.csv', header=True)
+df = spark.read.csv('gs://gcp-streamlit-app/preventive-maintenance-app/data/exp1_14drivers_14cars_dailyRoutes.csv', header=True)
 #df.show()
 
 print("Count",df.count())
@@ -259,12 +259,12 @@ show_histogram(X_features[:],X_plot[:,:],X_train[:,:])
 client = storage.Client()
 
 # Define your GCS bucket and destination blob path
-bucket_name = 'dataproc_predictive_maintenance'
-dt_blob_name = 'models/dt/model.pkl'
-rf_blob_name = 'models/rf/model.pkl'
-knn_blob_name = 'models/knn/model.pkl'
-svm_blob_name = 'models/svm/model.pkl'
-nb_blob_name = 'models/nb/model.pkl'
+bucket_name = 'gcp-streamlit-app'
+dt_blob_name = 'preventive-maintenance-app/models/dt/model.pkl'
+rf_blob_name = 'preventive-maintenance-app/models/rf/model.pkl'
+knn_blob_name = 'preventive-maintenance-app/models/knn/model.pkl'
+svm_blob_name = 'preventive-maintenance-app/models/svm/model.pkl'
+nb_blob_name = 'preventive-maintenance-app/models/nb/model.pkl'
 
 
 decision_tree = DecisionTreeClassifier()
