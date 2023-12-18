@@ -1,5 +1,5 @@
 description: dt_config.yml.
-deploymentUri: gs://dataproc_predictive_maintenance/models/dt
+deploymentUri: gs://gcp-streamlit-app/preventive-maintenance-app/models/dt
 runtimeVersion: '2.1'
 autoScaling:
   minNodes: 1  # The minimum number of nodes to allocate for this model.
